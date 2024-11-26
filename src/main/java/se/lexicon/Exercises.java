@@ -1,6 +1,13 @@
 package se.lexicon;
 
 import se.lexicon.data.DataStorage;
+import se.lexicon.model.Gender;
+import se.lexicon.model.Person;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 public class Exercises {
 
@@ -11,7 +18,10 @@ public class Exercises {
     */
     public static void exercise1(String message) {
         System.out.println(message);
-        //Write your code here
+        List<Person> firstNameErik = storage.findMany(
+                person -> person.getFirstName().equalsIgnoreCase("Erik")
+        );
+        firstNameErik.forEach((p)-> System.out.println(p));
 
         System.out.println("----------------------");
     }
@@ -21,7 +31,11 @@ public class Exercises {
      */
     public static void exercise2(String message) {
         System.out.println(message);
-        //Write your code here
+        List<Person> genderFemale = storage.findMany(
+                person -> person.getGender() == Gender.FEMALE
+        );
+
+        genderFemale.forEach((p)-> System.out.println(p));
 
         System.out.println("----------------------");
     }
@@ -31,7 +45,11 @@ public class Exercises {
      */
     public static void exercise3(String message) {
         System.out.println(message);
-        //Write your code here
+
+        List<Person> bornAfter = storage.findMany(
+                person -> person.getBirthDate().isAfter(LocalDate.of(2000,01,01))
+        );
+        bornAfter.forEach((p)-> System.out.println(p));
 
         System.out.println("----------------------");
     }
@@ -41,7 +59,10 @@ public class Exercises {
      */
     public static void exercise4(String message) {
         System.out.println(message);
-        //Write your code here
+        Person person = storage.findOne(
+                p -> p.getId() == 123
+        );
+        System.out.println(person);
 
         System.out.println("----------------------");
 
@@ -53,7 +74,11 @@ public class Exercises {
      */
     public static void exercise5(String message) {
         System.out.println(message);
-        //Write your code here
+        Predicate<Person> id456 = person -> person.getId() == 456;
+
+
+
+
 
         System.out.println("----------------------");
     }
